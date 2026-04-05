@@ -15,7 +15,7 @@ unsigned int Database::size() const {
 }
 
 // добавить запись в БД
-void Database::add_rec(Fields& record) {
+void Database::add_rec(const Fields& record) {
     db.push_back(record);
 }
 
@@ -62,7 +62,7 @@ Database Database::search_recs(const Fields& search_rec) const {
         if (search_rec.get_year() != -1 && record.get_year() != search_rec.get_year()) flag = false;
         if (search_rec.get_rating() != -1.0f && record.get_rating() != search_rec.get_rating()) flag = false;
 
-        if (flag) result.add_rec(const_cast<Fields&>(record));
+        if (flag) result.add_rec(record);
     }
     return result;
 }

@@ -19,8 +19,8 @@ public:
         : id(id_), title(t), director(d), release_year(year), rating(r) {}
 
     int get_id() const { return id; }
-    std::string get_title() const { return title; }
-    std::string get_director() const { return director; }
+    const std::string& get_title() const { return title; }
+    const std::string& get_director() const { return director; }
     int get_year() const { return release_year; }
     float get_rating() const { return rating; }
 
@@ -34,37 +34,8 @@ public:
     void set_rating(float r) { rating = r; }
 
     // Сериализация в бинарный поток
-    void write_binary(std::ostream& os) const {
-        os.write(reinterpret_cast<const char*>(&id), sizeof(id));
-
-        // запись строк в бинарный файл: сначала длина строки, потом ее символы
-        int len = title.size();
-        os.write(reinterpret_cast<const char*>(&len), sizeof(len));
-        os.write(title.c_str(), len);
-        len = director.size();
-        os.write(reinterpret_cast<const char*>(&len), sizeof(len));
-        os.write(director.c_str(), len);
-
-        os.write(reinterpret_cast<const char*>(&release_year), sizeof(release_year));
-        os.write(reinterpret_cast<const char*>(&rating), sizeof(rating));
-    }
-
-    // Десериализация из бинарного потока
-    void read_binary(std::istream& is) {
-        is.read(reinterpret_cast<char*>(&id), sizeof(id));
-
-        //чтение строк из бинарного файла: читаем длину строки, выделяем под нее память, читаем ее символы
-        int len;
-        is.read(reinterpret_cast<char*>(&len), sizeof(len));
-        title.resize(len);
-        if (len) { is.read(&title[0], len); }
-        is.read(reinterpret_cast<char*>(&len), sizeof(len));
-        director.resize(len);
-        if (len) { is.read(&director[0], len); }
-
-        is.read(reinterpret_cast<char*>(&release_year), sizeof(release_year));
-        is.read(reinterpret_cast<char*>(&rating), sizeof(rating));
-    }
+    void write_binary(std::ostream& os) const;
+    void read_binary(std::istream& is);
 };
 
 class Vector {

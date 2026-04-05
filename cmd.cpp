@@ -240,7 +240,7 @@ void CmdManager::edit() {
 }
 
 // импорт базы данных
-void CmdManager::import_db(std::string database_file, std::string default_db) {
+void CmdManager::import_db(const std::string& database_file, const std::string& default_db) {
     std::cout << "Введите название файла, который необходимо импортировать:\n";
     
     std::string new_file;
@@ -267,7 +267,7 @@ void CmdManager::import_db(std::string database_file, std::string default_db) {
 }
 
 // экспорт (сохранение) БД в бинарный файл
-void CmdManager::export_db(std::string database_file) {
+void CmdManager::export_db(const std::string& database_file) {
     std::string new_file;
     std::cout << "Введите название файла, в который хотите экспортировать базу данных.\n";
     std::cout << "(Введите 0 для экспорта в текущий файл)\n";
@@ -297,7 +297,7 @@ void CmdManager::export_db(std::string database_file) {
 }
 
 // Выход из программы
-void CmdManager::exit(std::string database_file) {
+void CmdManager::exit(const std::string& database_file) {
     int answer = ask_yes_no("Сохранить изменения перед выходом?");
 
     if (answer == 1) {
@@ -314,7 +314,7 @@ void CmdManager::exit(std::string database_file) {
 }
 
 // вывод списка команд
-int print_commands(std::string database_file) {
+int print_commands(const std::string& database_file) {
     std::cout << "=================================\n";
     std::cout << "*    Управление базой данных    *\n";
     std::cout << "*            Netflix            *\n";

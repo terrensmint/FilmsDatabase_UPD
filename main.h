@@ -17,7 +17,7 @@ public:
     Fields& operator[](unsigned int i);
     const Fields& operator[](unsigned int i) const;
 
-    void add_rec(Fields& record);
+    void add_rec(const Fields& record);
     Database search_recs(const Fields& search_rec) const;
     void delete_rec(int id);
     void edit_rec(const Fields& record);
@@ -34,16 +34,16 @@ namespace cmd {
         Database& db;   // ссылка на БД
     public:
         CmdManager(Database& database) : db(database) {}
-        void import_db(std::string database_file, std::string default_db);
-        void export_db(std::string database_file);
+        void import_db(const std::string& database_file, const std::string& default_db);
+        void export_db(const std::string& database_file);
         void add();
         void del();
         void search();
         void edit();
-        void exit(std::string database_file);   // выход из программы
+        void exit(const std::string& database_file);
     };
 
-    int print_commands(std::string database_file);  // вывести все команды
+    int print_commands(const std::string& database_file);
     void clear();   // очистка буфера ввода
 }
 
