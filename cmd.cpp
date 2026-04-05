@@ -240,7 +240,7 @@ void CmdManager::edit() {
 }
 
 // импорт базы данных
-void CmdManager::import_db(const std::string& database_file, const std::string& default_db) {
+void CmdManager::import_db(std::string& database_file, const std::string& default_db) {
     std::cout << "Введите название файла, который необходимо импортировать:\n";
     
     std::string new_file;
@@ -257,11 +257,13 @@ void CmdManager::import_db(const std::string& database_file, const std::string& 
         std::cout << "====[ Ошибка ]====\n";
         std::cout << "Файл с названием '" << new_file << "' не найден.\n";
         std::cout << "Импортируем базу данных по умолчанию: " << default_db << "\n";
+        database_file = default_db;
         
         if (!db.read(default_db)) {
             std::cout << "Файл по умолчанию также не найден. Создана пустая база данных.\n";
         }
     } else {
+        database_file = new_file;
         std::cout << "База данных успешно импортирована из " << new_file << "!\n";
     }
 }

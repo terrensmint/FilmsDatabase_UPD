@@ -34,7 +34,7 @@ namespace cmd {
         Database& db;   // ссылка на БД
     public:
         CmdManager(Database& database) : db(database) {}
-        void import_db(const std::string& database_file, const std::string& default_db);
+        void import_db(std::string& database_file, const std::string& default_db);
         void export_db(const std::string& database_file);
         void add();
         void del();
